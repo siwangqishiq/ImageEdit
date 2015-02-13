@@ -65,9 +65,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sa=0x7f020001;
     }
     public static final class id {
-        public static final int CropOverlayView=0x7f040004;
-        public static final int ImageView_image=0x7f040003;
-        public static final int action_settings=0x7f040005;
+        public static final int CropOverlayView=0x7f040006;
+        public static final int ImageView_image=0x7f040005;
+        public static final int action_settings=0x7f040007;
+        public static final int drawer_layout=0x7f040003;
+        public static final int main=0x7f040004;
         public static final int off=0x7f040002;
         public static final int on=0x7f040000;
         public static final int onTouch=0x7f040001;

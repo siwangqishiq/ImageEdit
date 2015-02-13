@@ -155,7 +155,7 @@ public class CropOverlayView extends View {
                 if (mPressedHandle != null)
                     drawRuleOfThirdsGuidelines(canvas);
             } else if (mGuidelines == GUIDELINES_OFF) {
-                // Do nothing
+            	// Do nothing
             }
         }
 
@@ -176,7 +176,6 @@ public class CropOverlayView extends View {
         if (!isEnabled()) {
             return false;
         }
-
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
@@ -197,6 +196,7 @@ public class CropOverlayView extends View {
             default:
                 return false;
         }
+        
     }
 
     // Public Methods //////////////////////////////////////////////////////////
