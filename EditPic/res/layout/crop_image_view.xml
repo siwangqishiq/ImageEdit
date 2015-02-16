@@ -9,6 +9,8 @@
         android:scaleType="centerInside"
         tools:ignore="contentDescription"
         android:adjustViewBounds="true" />
+    
+    
 
     <com.xinlans.editpic.crop.CropOverlayView
         android:id="@+id/CropOverlayView"

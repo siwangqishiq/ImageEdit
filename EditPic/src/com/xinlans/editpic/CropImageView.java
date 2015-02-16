@@ -38,7 +38,6 @@ import com.xinlans.editpic.util.ImageViewUtil;
 /**
  * Custom view that provides cropping capabilities to an image.
  */
-@SuppressLint("NewApi")
 public class CropImageView extends FrameLayout {
 
     // Private Constants ///////////////////////////////////////////////////////
