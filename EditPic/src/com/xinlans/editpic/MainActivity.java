@@ -25,8 +25,7 @@ public class MainActivity extends FragmentActivity {
 		bottomToolsFlipper = (ViewFlipper) findViewById(R.id.bottom_fliper);
 		bottomToolsFlipper.setInAnimation(this, R.anim.in_bottom_to_top);
 		bottomToolsFlipper.setOutAnimation(this, R.anim.out_bottom_to_top);
-		// bottomToolsFlipper.startFlipping();
-
+		
 		stickerButton = findViewById(R.id.stickers_btn);
 		stickerButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -42,7 +41,7 @@ public class MainActivity extends FragmentActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {// 返回按钮事件监听
 			if (bottomToolsFlipper.getCurrentView().getId() == R.id.main_tools) {
 				if ((System.currentTimeMillis() - exitTime) > 1500) {
 					Toast toast = Toast.makeText(getApplicationContext(),

@@ -71,24 +71,29 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
         public static final int sa=0x7f020001;
+        public static final int sd=0x7f020002;
     }
     public static final class id {
-        public static final int CropOverlayView=0x7f050006;
-        public static final int ImageView_image=0x7f050005;
-        public static final int action_settings=0x7f05000a;
-        public static final int bottom_fliper=0x7f050007;
-        public static final int drawer_layout=0x7f050003;
-        public static final int main=0x7f050004;
-        public static final int main_tools=0x7f050008;
+        public static final int CropOverlayView=0x7f050009;
+        public static final int ImageView_image=0x7f050008;
+        public static final int action_settings=0x7f05000d;
+        public static final int bottom_fliper=0x7f05000a;
+        public static final int button=0x7f050004;
+        public static final int button2=0x7f050005;
+        public static final int drawer_layout=0x7f050006;
+        public static final int image=0x7f050003;
+        public static final int main=0x7f050007;
+        public static final int main_tools=0x7f05000b;
         public static final int off=0x7f050002;
         public static final int on=0x7f050000;
         public static final int onTouch=0x7f050001;
-        public static final int stickers_btn=0x7f050009;
+        public static final int stickers_btn=0x7f05000c;
     }
     public static final class layout {
-        public static final int activity_main=0x7f030000;
-        public static final int crop_image_view=0x7f030001;
-        public static final int main=0x7f030002;
+        public static final int activity_imagezoom=0x7f030000;
+        public static final int activity_main=0x7f030001;
+        public static final int crop_image_view=0x7f030002;
+        public static final int main=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f090000;
