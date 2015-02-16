@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.ColorMatrix;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -35,7 +36,6 @@ public class ImageViewTestActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_imagezoom);
 	}
 
@@ -134,12 +134,11 @@ public class ImageViewTestActivity extends Activity {
 						// previous matrix once the bitmap is changed
 						// imageMatrix = mImage.getDisplayMatrix();
 					}
-
+					
 					mImage.setImageBitmap(bitmap,
 							imageMatrix.isIdentity() ? null : imageMatrix,
 							ImageViewTouchBase.ZOOM_INVALID,
 							ImageViewTouchBase.ZOOM_INVALID);
-
 				} else {
 					Toast.makeText(this, "Failed to load the image",
 							Toast.LENGTH_LONG).show();
