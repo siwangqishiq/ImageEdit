@@ -83,16 +83,16 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int button2=0x7f050009;
         public static final int drawer_layout=0x7f05000a;
         public static final int image=0x7f050007;
-        public static final int ivCardView=0x7f050006;
         public static final int layout_title=0x7f050003;
         public static final int main=0x7f05000b;
         public static final int main_tools=0x7f050010;
         public static final int off=0x7f050002;
         public static final int on=0x7f050000;
         public static final int onTouch=0x7f050001;
+        public static final int stick_layer=0x7f050006;
         public static final int stickers_btn=0x7f050011;
         public static final int top_banner=0x7f05000e;
-        public static final int workspace=0x7f050005;
+        public static final int touch_image=0x7f050005;
     }
     public static final class layout {
         public static final int activity_demo=0x7f030000;

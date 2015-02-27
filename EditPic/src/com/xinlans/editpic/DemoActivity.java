@@ -10,14 +10,18 @@ import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
+
+import com.xinlan.editpic.imagezoom.ImageViewTouch;
+import com.xinlans.editpic.view.StickerView;
 
 public final class DemoActivity extends FragmentActivity {
 	public static final int SELECTED_IMAGE = 7;
 	private View selectBtn;
 	private Bitmap addBitmap;
-	private AbsoluteLayout workSpace;
+
+	private ImageViewTouch imageViewTouch;
+	private StickerView stickerView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +31,13 @@ public final class DemoActivity extends FragmentActivity {
 	}
 
 	private void initView() {
-		workSpace = (AbsoluteLayout) findViewById(R.id.workspace);
 		selectBtn = findViewById(R.id.btn_image);
 		selectBtn.setOnClickListener(new SelectBtnClick());
+
+		stickerView = (StickerView) findViewById(R.id.stick_layer);
+		imageViewTouch = (ImageViewTouch) findViewById(R.id.touch_image);
+		imageViewTouch.setImageBitmap(BitmapFactory.decodeResource(
+				this.getResources(), R.drawable.sd));
 	}
 
 	@Override
@@ -38,10 +46,6 @@ public final class DemoActivity extends FragmentActivity {
 		switch (requestCode) {
 		case SELECTED_IMAGE:
 			if (resultCode == RESULT_OK && null != data) {
-				if (addBitmap != null) {
-					addBitmap.recycle();
-					addBitmap = null;
-				}
 				Uri selectedImage = data.getData();
 				String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
@@ -54,18 +58,14 @@ public final class DemoActivity extends FragmentActivity {
 				cursor.close();
 
 				System.out.println("Ñ¡ÔñÍ¼Æ¬Â·¾¶ =====>" + picturePath);
-				addBitmap = BitmapFactory.decodeFile(picturePath);
-				// getImageLayout(m_bitmap);
-				addImageView(addBitmap);
+				addImageView(BitmapFactory.decodeFile(picturePath));
 			}
 			break;
 		}// end switch
 	}
 
 	protected void addImageView(Bitmap bitmap) {
-		ImageView addImg = new ImageView(this);
-		addImg.setImageBitmap(bitmap);
-		workSpace.addView(addImg);
+		stickerView.addBitImage(bitmap);
 	}
 
 	/**

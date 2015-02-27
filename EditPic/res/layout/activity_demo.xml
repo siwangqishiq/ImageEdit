@@ -22,22 +22,17 @@
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:padding="5dp" >
+        android:padding="0dp" >
 
-        <AbsoluteLayout
-            android:id="@+id/workspace"
+        <com.xinlan.editpic.imagezoom.ImageViewTouch
+            android:id="@+id/touch_image"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="#112211" >
+            android:layout_height="fill_parent" />
 
-            <ImageView
-                android:layout_x="100dp"
-                android:layout_y="100dp"
-                android:src="@drawable/sd"
-                android:id="@+id/ivCardView"
-                android:layout_width="100dp"
-                android:layout_height="100dp" />
-        </AbsoluteLayout>
+        <com.xinlans.editpic.view.StickerView
+            android:id="@+id/stick_layer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
     </FrameLayout>
 
 </LinearLayout>
