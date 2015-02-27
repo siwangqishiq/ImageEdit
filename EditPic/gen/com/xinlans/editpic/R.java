@@ -74,26 +74,32 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int sd=0x7f020002;
     }
     public static final class id {
-        public static final int CropOverlayView=0x7f050009;
-        public static final int ImageView_image=0x7f050008;
-        public static final int action_settings=0x7f05000d;
-        public static final int bottom_fliper=0x7f05000a;
-        public static final int button=0x7f050004;
-        public static final int button2=0x7f050005;
-        public static final int drawer_layout=0x7f050006;
-        public static final int image=0x7f050003;
-        public static final int main=0x7f050007;
-        public static final int main_tools=0x7f05000b;
+        public static final int CropOverlayView=0x7f05000d;
+        public static final int ImageView_image=0x7f05000c;
+        public static final int action_settings=0x7f050012;
+        public static final int bottom_fliper=0x7f05000f;
+        public static final int btn_image=0x7f050004;
+        public static final int button=0x7f050008;
+        public static final int button2=0x7f050009;
+        public static final int drawer_layout=0x7f05000a;
+        public static final int image=0x7f050007;
+        public static final int ivCardView=0x7f050006;
+        public static final int layout_title=0x7f050003;
+        public static final int main=0x7f05000b;
+        public static final int main_tools=0x7f050010;
         public static final int off=0x7f050002;
         public static final int on=0x7f050000;
         public static final int onTouch=0x7f050001;
-        public static final int stickers_btn=0x7f05000c;
+        public static final int stickers_btn=0x7f050011;
+        public static final int top_banner=0x7f05000e;
+        public static final int workspace=0x7f050005;
     }
     public static final class layout {
-        public static final int activity_imagezoom=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int crop_image_view=0x7f030002;
-        public static final int main=0x7f030003;
+        public static final int activity_demo=0x7f030000;
+        public static final int activity_imagezoom=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int crop_image_view=0x7f030003;
+        public static final int main=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f090000;
@@ -107,11 +113,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
+
+
+
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
+
+
+
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -127,7 +143,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f080001;
     }

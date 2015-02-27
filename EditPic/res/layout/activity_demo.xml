@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/layout_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#ffffff" >
+
+        <Button
+            android:id="@+id/btn_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="选择图片" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="5dp" >
+
+        <AbsoluteLayout
+            android:id="@+id/workspace"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#112211" >
+
+            <ImageView
+                android:layout_x="100dp"
+                android:layout_y="100dp"
+                android:src="@drawable/sd"
+                android:id="@+id/ivCardView"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+        </AbsoluteLayout>
+    </FrameLayout>
+
+</LinearLayout>

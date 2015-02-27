@@ -4,6 +4,7 @@
     android:layout_height="match_parent" >
 
     <LinearLayout
+        android:id="@+id/top_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true" >
@@ -97,5 +98,12 @@
                 android:text="贴图3" />
         </LinearLayout>
     </ViewFlipper>
+
+    <com.xinlans.editpic.EidtImage
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_fliper"
+        android:layout_below="@id/top_banner"
+        android:background="#001122" />
 
 </RelativeLayout>

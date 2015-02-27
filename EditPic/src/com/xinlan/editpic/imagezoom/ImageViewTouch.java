@@ -148,6 +148,7 @@ public final class ImageViewTouch extends ImageViewTouchBase {
 			return false;
 
 		mUserScaled = true;
+//		scrollBy(distanceX, distanceY);
 		scrollBy(-distanceX, -distanceY);
 		invalidate();
 		return true;
@@ -175,9 +176,9 @@ public final class ImageViewTouch extends ImageViewTouchBase {
 
 		float diffX = e2.getX() - e1.getX();
 		float diffY = e2.getY() - e1.getY();
-
 		if (Math.abs(velocityX) > 800 || Math.abs(velocityY) > 800) {
 			mUserScaled = true;
+			//System.out.println("on fling scroll");
 			scrollBy(diffX / 2, diffY / 2, 300);
 			invalidate();
 			return true;
