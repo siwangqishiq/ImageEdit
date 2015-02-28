@@ -40,7 +40,6 @@ public final class ImageViewTouch extends ImageViewTouchBase {
 		mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
 		mGestureListener = getGestureListener();
 		mScaleListener = getScaleListener();
-
 		mScaleDetector = new ScaleGestureDetector(getContext(), mScaleListener);
 		mGestureDetector = new GestureDetector(getContext(), mGestureListener,
 				null, true);

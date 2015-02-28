@@ -5,6 +5,9 @@ import java.util.LinkedHashMap;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -20,11 +23,15 @@ import android.view.View;
 public class StickerView extends View {
 	private static int STATUS_IDLE = 0;
 	private static int STATUS_MOVE = 1;// 移动状态
+
 	private int imageCount;// 已加入照片的数量
 	private Context mContext;
 	private int currentStatus;// 当前状态
 	private StickerItem currentItem;// 当前操作的贴图数据
 	private float oldx, oldy;
+
+	private Paint rectPaint = new Paint();
+	private Paint boxPaint = new Paint();
 
 	private LinkedHashMap<Integer, StickerItem> bank = new LinkedHashMap<Integer, StickerItem>();// 存贮每层贴图数据
 
@@ -46,17 +53,18 @@ public class StickerView extends View {
 	private void init(Context context) {
 		this.mContext = context;
 		currentStatus = STATUS_IDLE;
+
+		rectPaint.setColor(Color.RED);
+		rectPaint.setAlpha(100);
+
 	}
 
 	public void addBitImage(final Bitmap addBit) {
-		StickerItem item = new StickerItem();
-		item.bitmap = addBit;
-		item.srcRect = new Rect(0, 0, addBit.getWidth(), addBit.getHeight());
-		int bitWidth = 160;
-		int bitHeight = 160;
-		int left = (getWidth() >> 1) - (bitWidth >> 1);
-		int top = (getHeight() >> 1) - (bitHeight >> 1);
-		item.dstRect = new RectF(left, top, left + bitWidth, top + bitHeight);
+		StickerItem item = new StickerItem(this.getContext());
+		item.init(addBit, this);
+		if (currentItem != null) {
+			currentItem.isDrawHelpTool = false;
+		}
 		bank.put(++imageCount, item);
 		this.invalidate();// 重绘视图
 	}
@@ -67,17 +75,17 @@ public class StickerView extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		System.out.println("on draw!!~");
+		// System.out.println("on draw!!~");
 		for (Integer id : bank.keySet()) {
 			StickerItem item = bank.get(id);
-			canvas.drawBitmap(item.bitmap, item.srcRect, item.dstRect, null);
+			item.draw(canvas);
 		}// end for each
 	}
 
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		System.out.println(w + "   " + h + "    " + oldw + "   " + oldh);
+		// System.out.println(w + "   " + h + "    " + oldw + "   " + oldh);
 	}
 
 	@Override
@@ -89,36 +97,39 @@ public class StickerView extends View {
 		float y = event.getY();
 		switch (action & MotionEvent.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN:
+
 			for (Integer id : bank.keySet()) {
 				StickerItem item = bank.get(id);
 				if (item.dstRect.contains(x, y)) {
 					// 被选中一张贴图
 					ret = true;
+					if (currentItem != null) {
+						currentItem.isDrawHelpTool = false;
+					}
 					currentItem = item;
+					currentItem.isDrawHelpTool = true;
 					currentStatus = STATUS_MOVE;
 					oldx = x;
 					oldy = y;
-					break;
 				}// end if
 			}// end for each
-			System.out.println(x + "    " + y);
+
+			if (!ret && currentItem != null) {// 没有贴图被选择
+				currentItem.isDrawHelpTool = false;
+				currentItem = null;
+				invalidate();
+			}
 			break;
 		case MotionEvent.ACTION_MOVE:
 			ret = true;
 			if (currentStatus == STATUS_MOVE) {// 移动贴图
 				float dx = x - oldx;
 				float dy = y - oldy;
-
 				oldx = x;
 				oldy = y;
 				if (currentItem != null) {
-					float h = currentItem.dstRect.height();
-					float w = currentItem.dstRect.width();
-					currentItem.dstRect.left += dx;
-					currentItem.dstRect.top += dy;
-					currentItem.dstRect.right = currentItem.dstRect.left + w;
-					currentItem.dstRect.bottom = currentItem.dstRect.top + h;
-					postInvalidate();
+					currentItem.updatePos(dx, dy);
+					invalidate();
 				}// end if
 			}// endif
 			break;
@@ -131,10 +142,7 @@ public class StickerView extends View {
 		return ret;
 	}
 
-	private final class StickerItem {
-		Bitmap bitmap;
-		Rect srcRect;// 原始图片坐标
-		RectF dstRect;// 绘制目标坐标
-	}// end inner class
-
+	public LinkedHashMap<Integer, StickerItem> getBank() {
+		return bank;
+	}
 }// end class
