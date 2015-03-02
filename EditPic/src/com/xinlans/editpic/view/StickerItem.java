@@ -35,6 +35,7 @@ public class StickerItem {
 	public Matrix matrix;// 变化矩阵
 
 	boolean isDrawHelpTool = false;
+	private Paint dstPaint = new Paint();
 	private Paint helpBoxPaint = new Paint();
 
 	private static Bitmap deleteBit;
@@ -45,6 +46,10 @@ public class StickerItem {
 		helpBoxPaint.setColor(Color.BLACK);
 		helpBoxPaint.setStyle(Style.STROKE);
 		helpBoxPaint.setStrokeWidth(4);
+
+		dstPaint = new Paint();
+		dstPaint.setColor(Color.RED);
+		dstPaint.setAlpha(100);
 
 		// 导入工具按钮位图
 		if (deleteBit == null) {
@@ -74,10 +79,7 @@ public class StickerItem {
 		// (float)bitHeight/addBit.getHeight());
 		this.isDrawHelpTool = true;
 		this.helpBox = new RectF(this.dstRect);
-		this.helpBox.left -= HELP_BOX_PAD;
-		this.helpBox.right += HELP_BOX_PAD;
-		this.helpBox.top -= HELP_BOX_PAD;
-		this.helpBox.bottom += HELP_BOX_PAD;
+		updateHelpBoxRect();
 
 		helpToolsRect = new Rect(0, 0, deleteBit.getWidth(),
 				deleteBit.getHeight());
@@ -90,6 +92,14 @@ public class StickerItem {
 				+ BUTTON_WIDTH);
 	}
 
+	private void updateHelpBoxRect() {
+		this.helpBox.left -= HELP_BOX_PAD;
+		this.helpBox.right += HELP_BOX_PAD;
+		this.helpBox.top -= HELP_BOX_PAD;
+		this.helpBox.bottom += HELP_BOX_PAD;
+
+	}
+
 	/**
 	 * 位置更新
 	 * 
@@ -97,14 +107,61 @@ public class StickerItem {
 	 * @param dy
 	 */
 	public void updatePos(final float dx, final float dy) {
+		this.matrix.postTranslate(dx, dy);// 记录到矩阵中
+
 		dstRect.offset(dx, dy);
-		helpBox.offset(dx, dy);
 
 		// 工具按钮随之移动
+		helpBox.offset(dx, dy);
 		deleteRect.offset(dx, dy);
 		rotateRect.offset(dx, dy);
 
-		this.matrix.postTranslate(dx, dy);// 记录到矩阵中
+	}
+
+	/**
+	 * 旋转 缩放 更新
+	 * 
+	 * @param dx
+	 * @param dy
+	 */
+	public void updateRotateAndScale(final float oldx, final float oldy,
+			final float dx, final float dy) {
+		float x = oldx;
+		float y = oldy;
+
+		float c_x = dstRect.centerX();
+		float c_y = dstRect.centerY();
+
+		float n_x = x + dx;
+		float n_y = y + dy;
+
+		float xa = x - c_x;
+		float ya = y - c_y;
+
+		float xb = n_x - c_x;
+		float yb = n_y - c_y;
+
+		float srcLen = (float) Math.sqrt(xa * xa + ya * ya);
+		float curLen = (float) Math.sqrt(xb * xb + yb * yb);
+
+		float scale = curLen / srcLen;// 计算缩放比
+
+		this.matrix.postScale(scale, scale, this.dstRect.centerX(),
+				this.dstRect.centerY());// 存入scale矩阵
+		// this.matrix.postRotate(5, this.dstRect.centerX(),
+		// this.dstRect.centerY());
+		scaleRect(this.dstRect, scale);// 缩放目标矩形
+
+		// 重新计算工具箱坐标
+		helpBox.set(dstRect);
+		updateHelpBoxRect();//重新计算
+		rotateRect.offsetTo(helpBox.right - BUTTON_WIDTH, helpBox.bottom
+				- BUTTON_WIDTH);
+		deleteRect.offsetTo(helpBox.left - BUTTON_WIDTH, helpBox.top
+				- BUTTON_WIDTH);
+		// System.out
+		// .println(srcLen + "     " + curLen + "    scale--->" + scale);
+
 	}
 
 	/**
@@ -114,16 +171,38 @@ public class StickerItem {
 	 */
 	public void draw(Canvas canvas) {
 		canvas.drawBitmap(this.bitmap, this.matrix, null);// 贴图元素绘制
-		if (this.isDrawHelpTool) {// 绘制辅助工具线
-			canvas.drawRoundRect(helpBox, 10, 10, helpBoxPaint);
+		// canvas.drawRect(this.dstRect, dstPaint);
 
+		if (this.isDrawHelpTool) {// 绘制辅助工具线
+			canvas.save();
+			canvas.rotate(0, helpBox.centerX(), helpBox.centerY());
+			canvas.drawRoundRect(helpBox, 10, 10, helpBoxPaint);
 			// 绘制工具按钮
 			canvas.drawBitmap(deleteBit, helpToolsRect, deleteRect, null);
 			canvas.drawBitmap(rotateBit, helpToolsRect, rotateRect, null);
-
-			// canvas.drawBitmap(deleteBit, helpBox.left, helpBox.top, null);
-			// canvas.drawBitmap(rotateBit, helpBox.right, helpBox.bottom,
-			// null);
+			canvas.restore();
 		}// end if
+	}
+
+	/**
+	 * 缩放指定矩形
+	 * 
+	 * @param rect
+	 * @param scale
+	 */
+	private static void scaleRect(RectF rect, float scale) {
+		float w = rect.width();
+		float h = rect.height();
+
+		float newW = scale * w;
+		float newH = scale * h;
+
+		float dx = (newW - w) / 2;
+		float dy = (newH - h) / 2;
+
+		rect.left -= dx;
+		rect.top -= dy;
+		rect.right += dx;
+		rect.bottom += dy;
 	}
 }// end class

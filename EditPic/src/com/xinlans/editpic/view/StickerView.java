@@ -24,6 +24,7 @@ public class StickerView extends View {
 	private static int STATUS_IDLE = 0;
 	private static int STATUS_MOVE = 1;// 移动状态
 	private static int STATUS_DELETE = 2;// 删除状态
+	private static int STATUS_ROTATE = 3;// 图片旋转状态
 
 	private int imageCount;// 已加入照片的数量
 	private Context mContext;
@@ -106,6 +107,16 @@ public class StickerView extends View {
 					// ret = true;
 					deleteId = id;
 					currentStatus = STATUS_DELETE;
+				} else if (item.rotateRect.contains(x, y)) {// 点击了旋转按钮
+					ret = true;
+					if (currentItem != null) {
+						currentItem.isDrawHelpTool = false;
+					}
+					currentItem = item;
+					currentItem.isDrawHelpTool = true;
+					currentStatus = STATUS_ROTATE;
+					oldx = x;
+					oldy = y;
 				} else if (item.dstRect.contains(x, y)) {// 移动模式
 					// 被选中一张贴图
 					ret = true;
@@ -120,7 +131,7 @@ public class StickerView extends View {
 				}// end if
 			}// end for each
 
-			if (!ret && currentItem != null) {// 没有贴图被选择
+			if (!ret && currentItem != null && currentStatus == STATUS_IDLE) {// 没有贴图被选择
 				currentItem.isDrawHelpTool = false;
 				currentItem = null;
 				invalidate();
@@ -138,13 +149,23 @@ public class StickerView extends View {
 			if (currentStatus == STATUS_MOVE) {// 移动贴图
 				float dx = x - oldx;
 				float dy = y - oldy;
-				oldx = x;
-				oldy = y;
 				if (currentItem != null) {
 					currentItem.updatePos(dx, dy);
 					invalidate();
 				}// end if
-			}// endif
+				oldx = x;
+				oldy = y;
+			} else if (currentStatus == STATUS_ROTATE) {// 旋转 缩放图片操作
+				// System.out.println("旋转");
+				float dx = x - oldx;
+				float dy = y - oldy;
+				if (currentItem != null) {
+					currentItem.updateRotateAndScale(oldx, oldy, dx, dy);// 旋转
+					invalidate();
+				}// end if
+				oldx = x;
+				oldy = y;
+			}
 			break;
 		case MotionEvent.ACTION_CANCEL:
 		case MotionEvent.ACTION_UP:
