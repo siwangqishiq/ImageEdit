@@ -23,6 +23,7 @@ import android.view.View;
 public class StickerView extends View {
 	private static int STATUS_IDLE = 0;
 	private static int STATUS_MOVE = 1;// 移动状态
+	private static int STATUS_DELETE = 2;// 删除状态
 
 	private int imageCount;// 已加入照片的数量
 	private Context mContext;
@@ -98,9 +99,14 @@ public class StickerView extends View {
 		switch (action & MotionEvent.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN:
 
+			int deleteId = -1;
 			for (Integer id : bank.keySet()) {
 				StickerItem item = bank.get(id);
-				if (item.dstRect.contains(x, y)) {
+				if (item.deleteRect.contains(x, y)) {// 删除模式
+					// ret = true;
+					deleteId = id;
+					currentStatus = STATUS_DELETE;
+				} else if (item.dstRect.contains(x, y)) {// 移动模式
 					// 被选中一张贴图
 					ret = true;
 					if (currentItem != null) {
@@ -119,6 +125,13 @@ public class StickerView extends View {
 				currentItem = null;
 				invalidate();
 			}
+
+			if (deleteId > 0 && currentStatus == STATUS_DELETE) {// 删除选定贴图
+				bank.remove(deleteId);
+				currentStatus = STATUS_IDLE;// 返回空闲状态
+				invalidate();
+			}// end if
+
 			break;
 		case MotionEvent.ACTION_MOVE:
 			ret = true;
