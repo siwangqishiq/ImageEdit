@@ -103,11 +103,11 @@ public class StickerView extends View {
 			int deleteId = -1;
 			for (Integer id : bank.keySet()) {
 				StickerItem item = bank.get(id);
-				if (item.deleteRect.contains(x, y)) {// 删除模式
+				if (item.detectDeleteRect.contains(x, y)) {// 删除模式
 					// ret = true;
 					deleteId = id;
 					currentStatus = STATUS_DELETE;
-				} else if (item.rotateRect.contains(x, y)) {// 点击了旋转按钮
+				} else if (item.detectRotateRect.contains(x, y)) {// 点击了旋转按钮
 					ret = true;
 					if (currentItem != null) {
 						currentItem.isDrawHelpTool = false;
