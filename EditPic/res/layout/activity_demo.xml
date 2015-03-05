@@ -4,27 +4,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/layout_title"
+    <HorizontalScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="#ffffff" >
+        android:fillViewport="true" >
 
-        <Button
-            android:id="@+id/btn_gen"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="生成" />
+            android:background="#ffffff"
+            android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/btn_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="选择图片" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/btn_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择贴图" />
+
+            <Button
+                android:id="@+id/btn_gen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生成贴图" />
+
+            <Button
+                android:id="@+id/crop_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="剪裁图片" />
+
+            <Button
+                android:id="@+id/gen_crop_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生成剪裁" />
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -40,6 +56,13 @@
             android:id="@+id/stick_layer"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
+
+        <com.xinlans.editpic.CropImageView
+            android:id="@+id/cropImageView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:visibility="gone" />
     </FrameLayout>
 
 </LinearLayout>

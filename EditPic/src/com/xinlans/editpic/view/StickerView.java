@@ -179,4 +179,9 @@ public class StickerView extends View {
 	public LinkedHashMap<Integer, StickerItem> getBank() {
 		return bank;
 	}
+
+	public void clear() {
+		bank.clear();
+		this.invalidate();
+	}
 }// end class

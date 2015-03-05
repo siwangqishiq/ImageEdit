@@ -157,9 +157,6 @@ public class StickerItem {
 		float n_x = x + dx;
 		float n_y = y + dy;
 
-		cur_x = n_x;
-		cur_y = n_y;
-
 		float xa = x - c_x;
 		float ya = y - c_y;
 
@@ -225,14 +222,6 @@ public class StickerItem {
 		// .println(srcLen + "     " + curLen + "    scale--->" + scale);
 
 	}
-
-	/**
-	 * 绘制贴图元素
-	 * 
-	 * @param canvas
-	 */
-	float cur_x;
-	float cur_y;
 
 	public void draw(Canvas canvas) {
 		canvas.drawBitmap(this.bitmap, this.matrix, null);// 贴图元素绘制

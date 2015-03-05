@@ -72,41 +72,48 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int asd=0x7f020000;
         public static final int delete=0x7f020001;
         public static final int ic_launcher=0x7f020002;
-        public static final int rotate=0x7f020003;
-        public static final int s=0x7f020004;
-        public static final int sa=0x7f020005;
-        public static final int sd=0x7f020006;
+        public static final int jianniang=0x7f020003;
+        public static final int jianniang2=0x7f020004;
+        public static final int rotate=0x7f020005;
+        public static final int s=0x7f020006;
+        public static final int sa=0x7f020007;
+        public static final int sd=0x7f020008;
+        public static final int xuefd=0x7f020009;
     }
     public static final class id {
-        public static final int CropOverlayView=0x7f05000f;
-        public static final int ImageView_image=0x7f05000e;
-        public static final int action_settings=0x7f050014;
-        public static final int bottom_fliper=0x7f050011;
-        public static final int btn_gen=0x7f050004;
-        public static final int btn_image=0x7f050005;
-        public static final int button=0x7f050009;
-        public static final int button2=0x7f05000a;
-        public static final int drawer_layout=0x7f05000b;
-        public static final int image=0x7f050008;
+        public static final int CropOverlayView=0x7f050012;
+        public static final int ImageView_image=0x7f050011;
+        public static final int action_settings=0x7f050017;
+        public static final int bottom_fliper=0x7f050014;
+        public static final int btn_gen=0x7f050005;
+        public static final int btn_image=0x7f050004;
+        public static final int button=0x7f05000c;
+        public static final int button2=0x7f05000d;
+        public static final int cropImageView=0x7f05000a;
+        public static final int crop_image=0x7f050006;
+        public static final int drawer_layout=0x7f05000e;
+        public static final int gen_crop_image=0x7f050007;
+        public static final int image=0x7f05000b;
         public static final int layout_title=0x7f050003;
-        public static final int main=0x7f05000c;
-        public static final int main_tools=0x7f050012;
+        public static final int main=0x7f05000f;
+        public static final int main_tools=0x7f050015;
         public static final int off=0x7f050002;
         public static final int on=0x7f050000;
         public static final int onTouch=0x7f050001;
-        public static final int show_image=0x7f05000d;
-        public static final int stick_layer=0x7f050007;
-        public static final int stickers_btn=0x7f050013;
-        public static final int top_banner=0x7f050010;
-        public static final int touch_image=0x7f050006;
+        public static final int show_image=0x7f050010;
+        public static final int stick_layer=0x7f050009;
+        public static final int stickers_btn=0x7f050016;
+        public static final int top_banner=0x7f050013;
+        public static final int touch_image=0x7f050008;
     }
     public static final class layout {
         public static final int activity_demo=0x7f030000;
-        public static final int activity_imagezoom=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int activity_show=0x7f030003;
-        public static final int crop_image_view=0x7f030004;
-        public static final int main=0x7f030005;
+        public static final int activity_filter=0x7f030001;
+        public static final int activity_imagezoom=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_show=0x7f030004;
+        public static final int crop_image_view=0x7f030005;
+        public static final int main=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f090000;
